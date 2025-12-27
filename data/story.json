@@ -7,8 +7,12 @@
   },
   "scenes": {
     "journey_start": {
-      "background": "road.png",
-      "text": "Raj had come a long way. He wandered through lands with a single purpose.",
+      "background": "road.jpg",
+      "text": [
+        "Raj had come a long way, though the road behind him no longer belonged to memory. His feet moved out of habit, not certainty.",
+        "The land stretched endlessly ahead—quiet, patient, uncaring. Every step felt rehearsed, as if he had once known where he was going.",
+        "He could not remember why the journey began. Only that stopping felt wrong."
+      ],
       "choices": [
         {
           "text": "Focus on the destination.",
@@ -24,8 +28,12 @@
     },
 
     "companions_join": {
-      "background": "camp.png",
-      "text": "Travelers, fighters, and guides joined Raj along the way.",
+      "background": "camp.jpg",
+      "text": [
+        "Along the road, others joined him. Travelers seeking shelter. Fighters chasing causes. Guides who spoke as if they knew the land intimately.",
+        "At night, fires were lit. Stories were told. Laughter flickered briefly, like sparks escaping into the dark.",
+        "Raj listened—but each voice felt distant, as though heard through water."
+      ],
       "choices": [
         {
           "text": "Keep moving forward.",
@@ -41,8 +49,12 @@
     },
 
     "companions_leave": {
-      "background": "empty_road.png",
-      "text": "One by one, they left. Raj did not stop to look back.",
+      "background": "empty_road.jpg",
+      "text": [
+        "Morning came, and the road thinned.",
+        "One by one, the companions left—turning toward villages, borders, and lives that clearly belonged to them.",
+        "Raj did not ask them to stay. He was unsure if he even noticed when the last set of footsteps faded away."
+      ],
       "choices": [
         {
           "text": "Do not look back.",
@@ -53,8 +65,12 @@
     },
 
     "dragon": {
-      "background": "dragon.png",
-      "text": "By the time Raj stood before the dragon, their faces had faded.",
+      "background": "dragon.jpg",
+      "text": [
+        "The dragon waited at the end of the road, just as the stories promised.",
+        "Its presence was overwhelming—ancient, heavy, unquestioning. This was the obstacle meant to justify the journey.",
+        "Yet as Raj raised his weapon, no faces came to mind. No cheers. No fear. Only silence."
+      ],
       "choices": [
         {
           "text": "Strike the dragon down.",
@@ -65,8 +81,12 @@
     },
 
     "victory": {
-      "background": "ruins.png",
-      "text": "When the dragon fell, there was no victory waiting for him.",
+      "background": "ruins.jpg",
+      "text": [
+        "The dragon fell.",
+        "The land did not change. No songs were sung. No doors opened.",
+        "Raj stood alone among ruins, realizing victory had never been the thing he was searching for."
+      ],
       "choices": [
         {
           "text": "Search the spell book.",
@@ -78,7 +98,11 @@
 
     "spell_book": {
       "background": "camp_night.jpg",
-      "text": "Every page was blank. Then faint markings appeared. The book was never meant to hold power—it was meant to hold people.",
+      "text": [
+        "The spell book lay where it always had—silent, unassuming.",
+        "Every page was blank at first. Then faint markings appeared, responding not to magic, but to memory.",
+        "The book was never meant to hold power. It was meant to hold people."
+      ],
       "choices": [
         {
           "text": "Write the names of those who walked beside you.",
@@ -90,7 +114,11 @@
 
     "chapter_end": {
       "background": "road_home.jpg",
-      "text": "Raj continued his journey—not chasing an end, but finding his way back home.",
+      "text": [
+        "Raj returned to the road, but it no longer felt endless.",
+        "The journey was not about reaching the end—it was about remembering who had shaped the path.",
+        "And this time, he walked toward home."
+      ],
       "choices": []
     }
   }
