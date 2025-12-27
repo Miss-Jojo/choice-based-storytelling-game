@@ -15,12 +15,22 @@ body {
 
   transition: background-image 1s ease-in-out;
 }
+
+/* ==============================
+   OVERLAY
+============================== */
+
 #overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   z-index: 0;
 }
+
+/* ==============================
+   GAME CONTAINER
+============================== */
+
 #game {
   position: relative;
   z-index: 1;
@@ -35,6 +45,11 @@ body {
 
   padding: 2rem;
 }
+
+/* ==============================
+   TEXT BOX
+============================== */
+
 #text-box {
   background: rgba(0, 0, 0, 0.65);
   padding: 1.5rem;
@@ -47,12 +62,18 @@ body {
   font-size: 1.1rem;
   line-height: 1.7;
 }
+
+/* ==============================
+   CHOICES
+============================== */
+
 #choices {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
+/* INITIAL (HIDDEN) STATE */
 #choices button {
   background: rgba(255, 255, 255, 0.08);
   color: #f2f2f2;
@@ -65,12 +86,50 @@ body {
   text-align: left;
 
   cursor: pointer;
-  transition: all 0.2s ease;
+
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease;
+}
+
+/* VISIBLE STATE */
+#choices button.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 #choices button:hover {
   background: rgba(255, 255, 255, 0.18);
 }
+
+/* ==============================
+   TYPING CURSOR
+============================== */
+
+.typing::after {
+  content: "▍";
+  animation: blink 1s infinite;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
 @media (max-width: 600px) {
   #text {
     font-size: 1rem;
