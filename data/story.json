@@ -1,0 +1,97 @@
+{
+  "start": "journey_start",
+  "variables": {
+    "memory": 0,
+    "emptiness": 0,
+    "purpose": 1
+  },
+  "scenes": {
+    "journey_start": {
+      "background": "road.png",
+      "text": "Raj had come a long way. He wandered through lands with a single purpose.",
+      "choices": [
+        {
+          "text": "Focus on the destination.",
+          "effects": { "purpose": 1 },
+          "next": "companions_join"
+        },
+        {
+          "text": "Notice the people walking beside him.",
+          "effects": { "memory": 1 },
+          "next": "companions_join"
+        }
+      ]
+    },
+
+    "companions_join": {
+      "background": "camp.png",
+      "text": "Travelers, fighters, and guides joined Raj along the way.",
+      "choices": [
+        {
+          "text": "Keep moving forward.",
+          "effects": { "purpose": 1 },
+          "next": "companions_leave"
+        },
+        {
+          "text": "Listen to their stories.",
+          "effects": { "memory": 2 },
+          "next": "companions_leave"
+        }
+      ]
+    },
+
+    "companions_leave": {
+      "background": "empty_road.png",
+      "text": "One by one, they left. Raj did not stop to look back.",
+      "choices": [
+        {
+          "text": "Do not look back.",
+          "effects": { "emptiness": 1 },
+          "next": "dragon"
+        }
+      ]
+    },
+
+    "dragon": {
+      "background": "dragon.png",
+      "text": "By the time Raj stood before the dragon, their faces had faded.",
+      "choices": [
+        {
+          "text": "Strike the dragon down.",
+          "effects": {},
+          "next": "victory"
+        }
+      ]
+    },
+
+    "victory": {
+      "background": "ruins.png",
+      "text": "When the dragon fell, there was no victory waiting for him.",
+      "choices": [
+        {
+          "text": "Search the spell book.",
+          "effects": {},
+          "next": "spell_book"
+        }
+      ]
+    },
+
+    "spell_book": {
+      "background": "camp_night.jpg",
+      "text": "Every page was blank. Then faint markings appeared. The book was never meant to hold power—it was meant to hold people.",
+      "choices": [
+        {
+          "text": "Write the names of those who walked beside you.",
+          "effects": { "memory": 3, "emptiness": -1 },
+          "next": "chapter_end"
+        }
+      ]
+    },
+
+    "chapter_end": {
+      "background": "road_home.jpg",
+      "text": "Raj continued his journey—not chasing an end, but finding his way back home.",
+      "choices": []
+    }
+  }
+}
