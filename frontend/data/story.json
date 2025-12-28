@@ -1,0 +1,239 @@
+{
+  "start": "journey_start",
+  "variables": {
+    "memory": 0,
+    "emptiness": 0,
+    "purpose": 1
+  },
+  "scenes": {
+    "journey_start": {
+      "background": "road.png",
+      "beats": [
+        {
+          "type": "text",
+          "content": "Raj had come a long way, though the road behind him no longer belonged to memory. His feet moved out of habit, not certainty."
+        },
+        
+        {
+          "type": "text",
+          "content": "The land stretched endlessly ahead—quiet, patient, uncaring. Every step felt rehearsed, as if he had once known where he was going."
+        },
+        
+        
+        {
+          "type": "text",
+          "content": "He could not remember why the journey began. Only that stopping felt wrong."
+        },
+        
+        {
+          "type": "choice",
+          "choices": [
+            {
+              "text": "Focus on the destination.",
+              "effects": { "purpose": 1 },
+              "next": "companions_join"
+            },
+            {
+              "text": "Notice the people walking beside him.",
+              "effects": { "memory": 1 },
+              "next": "companions_join"
+            }
+          ]
+        }
+      ]
+    },
+
+    "companions_join": {
+      "background": "camp.png",
+      "beats": [
+        {
+          "type": "text",
+          "content": "Along the road, others joined him. Travelers seeking shelter. Fighters chasing causes. Guides who spoke as if they knew the land intimately."
+        },
+        
+        {
+          "type": "text",
+          "content": "At night, fires were lit."
+        },
+        {
+          "type": "text",
+          "content": "Stories were told."
+        },
+        {
+          "type": "text",
+          "content": "Laughter flickered briefly, like sparks escaping into the dark."
+        },
+        {
+          "type": "text",
+          "content": "Raj listened—but each voice felt distant, as though heard through water."
+        },
+        {
+          "type": "choice",
+          "choices": [
+            {
+              "text": "Keep moving forward.",
+              "effects": { "purpose": 1 },
+              "next": "companions_leave"
+            },
+            {
+              "text": "Listen to their stories.",
+              "effects": { "memory": 2 },
+              "next": "companions_leave"
+            }
+          ]
+        }
+      ]
+    },
+
+    "companions_leave": {
+      "background": "empty_road.png",
+      "beats": [
+        {
+          "type": "text",
+          "content": "Morning came, and the road thinned."
+        },
+        {
+          "type": "text",
+          "content": "One by one, the companions left—turning toward villages, borders, and lives that clearly belonged to them."
+        },
+        {
+          "type": "text",
+          "content": "Raj did not ask them to stay."
+        },
+        {
+          "type": "text",
+          "content": "He was unsure if he even noticed when the last set of footsteps faded away."
+        },
+        {
+          "type": "choice",
+          "choices": [
+            {
+              "text": "Do not look back.",
+              "effects": { "emptiness": 1 },
+              "next": "dragon"
+            }
+          ]
+        }
+      ]
+    },
+
+    "dragon": {
+      "background": "dragon.png",
+      "beats": [
+        {
+          "type": "text",
+          "content": "The dragon waited at the end of the road, just as the stories promised."
+        },
+        {
+          "type": "text",
+          "content": "Its presence was overwhelming—ancient, heavy, unquestioning. This was the obstacle meant to justify the journey. Yet as Raj raised his weapon, no faces came to mind."
+        },
+        
+        
+        {
+          "type": "text",
+          "content": "No cheers. No fear. Only silence."
+        },
+        
+        {
+          "type": "choice",
+          "choices": [
+            {
+              "text": "Strike the dragon down.",
+              "effects": {},
+              "next": "victory"
+            }
+          ]
+        }
+      ]
+    },
+
+    "victory": {
+      "background": "ruins.jpg",
+      "beats": [
+        {
+          "type": "text",
+          "content": "The dragon fell. The land did not change. No songs were sung. No doors opened."
+        },
+        
+       
+        {
+          "type": "text",
+          "content": "Raj stood alone among ruins, realizing victory had never been the thing he was searching for. He looks around the ruins to find a something."
+        },
+        {
+          "type": "text",
+          "content": "Something that was... prehaps waiting to be found by him? Raj finds a spellbook laying where it always had—silent, unassuming.. He takes it with him abondoning the ruins."
+        },
+        {
+          "type": "choice",
+          "choices": [
+            {
+              "text": "Open the spell book.",
+              "effects": {},
+              "next": "spell_book"
+            }
+          ]
+        }
+      ]
+    },
+
+    "spell_book": {
+      "background": "camp_night.jpg",
+      "beats": [
+        {
+          "type": "text",
+          "content": "Sitting alone infront of the campfire, Raj opens the spellbook, his expresion ashtonished."
+        },
+        {
+          "type": "text",
+          "content": "Every page was blank with nothing written on it. The spellbook without any spells?? Quite strange."
+        },
+        {
+          "type": "text",
+          "content": "Then faint markings appeared, responding not to magic, but to memory."
+        },
+        {
+          "type": "text",
+          "content": "The book was never meant to hold power."
+        },
+        {
+          "type": "text",
+          "content": "It was meant to hold people."
+        },
+        {
+          "type": "choice",
+          "choices": [
+            {
+              "text": "Write the names of those who walked beside you.",
+              "effects": { "memory": 3, "emptiness": -1 },
+              "next": "chapter_end"
+            }
+          ]
+        }
+      ]
+    },
+
+    "chapter_end": {
+      "background": "road_home.jpg",
+      "beats": [
+        {
+          "type": "text",
+          "content": "Raj returned to the road, but it no longer felt endless."
+        },
+        {
+          "type": "text",
+          "content": "The journey was not about reaching the end."
+        },
+        {
+          "type": "text",
+          "content": "It was about remembering who had shaped the path."
+        },
+        {
+          "type": "text",
+          "content": "And this time, he walked toward home."
+        }
+      ]
+    }
+  }
+}

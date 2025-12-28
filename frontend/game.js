@@ -2,13 +2,14 @@
 // GLOBAL STATE
 // ==============================
 
-let typingInterval = null;
+let typingTimeout = null;
 let isTyping = false;
 
 let gameState = {
   variables: {},
   scenes: {},
   currentScene: "",
+  currentBeatIndex: 0,
 };
 
 const BG_PATH = "assets/backgrounds/";
@@ -37,39 +38,75 @@ async function initGame() {
 // LOAD SCENE
 // ==============================
 
-function loadScene(id) {
-  const scene = gameState.scenes[id];
-
+function loadScene(sceneId) {
+  const scene = gameState.scenes[sceneId];
   if (!scene) {
-    console.error("Scene not found:", id);
+    console.error("Scene not found:", sceneId);
     return;
   }
 
-  gameState.currentScene = id;
+  gameState.currentScene = sceneId;
+  gameState.currentBeatIndex = 0;
 
-  // Set background
   document.body.style.backgroundImage = `url(${BG_PATH}${scene.background})`;
 
-  // Clear choices immediately
-  const choicesEl = document.getElementById("choices");
-  choicesEl.innerHTML = "";
+  document.getElementById("choices").innerHTML = "";
+  document.getElementById("text").innerText = "";
 
-  // Type text, then show choices with a pause
-  typeText(scene.text, () => {
-    setTimeout(() => {
-      renderChoices(scene.choices || []);
-    }, 400);
-  });
+  playCurrentBeat();
 }
 
 // ==============================
-// TYPEWRITER EFFECT
+// PLAY CURRENT BEAT
 // ==============================
 
-function typeText(text, onComplete) {
+function playCurrentBeat() {
+  const scene = gameState.scenes[gameState.currentScene];
+  const beat = scene.beats[gameState.currentBeatIndex];
+
+  if (!beat) return;
+
+  // Clear choices by default
+  document.getElementById("choices").innerHTML = "";
+
+  if (beat.type === "text") {
+    typeText(beat.content);
+  }
+
+  if (beat.type === "choice") {
+    renderChoices(beat.choices);
+  }
+}
+
+// ==============================
+// ADVANCE BEAT
+// ==============================
+
+function nextBeat() {
+  const scene = gameState.scenes[gameState.currentScene];
+  const beat = scene.beats[gameState.currentBeatIndex];
+
+  // If typing → skip
+  if (isTyping) {
+    finishTyping(beat.content);
+    return;
+  }
+
+  // If current beat is choice → do nothing
+  if (beat.type === "choice") return;
+
+  gameState.currentBeatIndex++;
+  playCurrentBeat();
+}
+
+// ==============================
+// TYPEWRITER EFFECT (NATURAL & SLOW)
+// ==============================
+
+function typeText(text) {
   const textEl = document.getElementById("text");
 
-  if (typingInterval) clearInterval(typingInterval);
+  if (typingTimeout) clearTimeout(typingTimeout);
 
   textEl.innerText = "";
   textEl.classList.add("typing");
@@ -77,42 +114,58 @@ function typeText(text, onComplete) {
   let index = 0;
   isTyping = true;
 
-  typingInterval = setInterval(() => {
+  function typeNext() {
+    if (!isTyping) return;
+
     textEl.innerText += text[index];
+    const char = text[index];
     index++;
 
     if (index >= text.length) {
-      clearInterval(typingInterval);
-      textEl.classList.remove("typing");
       isTyping = false;
-      if (onComplete) onComplete();
+      textEl.classList.remove("typing");
+      return;
     }
-  }, 25);
+
+    let delay = 60;
+
+    if (char === "." || char === "!" || char === "?") delay = 420;
+    else if (char === "," || char === ";") delay = 220;
+    else if (char === "\n") delay = 500;
+
+    typingTimeout = setTimeout(typeNext, delay);
+  }
+
+  typeNext();
 }
 
 // ==============================
-// CLICK TO SKIP TYPING
+// FINISH TYPING INSTANTLY
 // ==============================
 
-document.addEventListener("click", () => {
-  if (!isTyping) return;
+function finishTyping(fullText) {
+  if (typingTimeout) clearTimeout(typingTimeout);
 
-  clearInterval(typingInterval);
   isTyping = false;
 
   const textEl = document.getElementById("text");
-  const scene = gameState.scenes[gameState.currentScene];
-
-  textEl.innerText = scene.text;
+  textEl.innerText = fullText;
   textEl.classList.remove("typing");
+}
 
-  setTimeout(() => {
-    renderChoices(scene.choices || []);
-  }, 200);
+// ==============================
+// CLICK ANYWHERE TO CONTINUE
+// ==============================
+
+document.addEventListener("click", (e) => {
+  // Ignore clicks on buttons
+  if (e.target.tagName === "BUTTON") return;
+
+  nextBeat();
 });
 
 // ==============================
-// RENDER CHOICES (SMOOTH APPEAR)
+// RENDER CHOICES
 // ==============================
 
 function renderChoices(choices) {
@@ -124,14 +177,13 @@ function renderChoices(choices) {
     btn.innerText = choice.text;
 
     btn.onclick = (e) => {
-      e.stopPropagation(); // prevent click-skip conflict
+      e.stopPropagation();
       applyEffects(choice.effects || {});
       loadScene(choice.next);
     };
 
     container.appendChild(btn);
 
-    // staggered fade-in
     setTimeout(() => {
       btn.classList.add("show");
     }, 300 + index * 150);
